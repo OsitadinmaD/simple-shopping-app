@@ -15,7 +15,7 @@ class ItemsDisplayView extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<CartProvider>(context,listen: false);
+     final provider = Provider.of<CartProvider>(context, listen: false);
 
     return Container(
       padding: const EdgeInsets.only(right: 10),
@@ -80,7 +80,7 @@ class ItemsDisplayView extends StatelessWidget {
               top: 190,
               left: 120,
               child: InkWell(
-                  onTap: () => provider.add(item: item),
+                  onTap: () => provider.addItem(item),
                   child: Container(
                     height: 40,
                     width: 40,

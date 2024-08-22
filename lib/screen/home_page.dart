@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:simple_shopping_app/screen/cart_provider.dart';
 import 'package:simple_shopping_app/screen/check_out.dart';
 import 'package:simple_shopping_app/screen/product_screen.dart';
 
@@ -15,6 +17,8 @@ class _HomePageState extends State<HomePage> {
  late Widget _currentPage;
   @override
   Widget build(BuildContext context) {
+    
+  final provider = Provider.of<CartProvider>(context);
     return Scaffold(
       appBar: AppBar(
         leading: Container(
@@ -49,9 +53,24 @@ class _HomePageState extends State<HomePage> {
           )
         ),
         centerTitle: true,
-        actions: const [
-         Icon(Icons.shopping_cart_rounded,color: Colors.black, size: 30,),
-         SizedBox(width: 73,)
+        actions: [
+          
+         Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            //const SizedBox(width: 1,),
+            const Icon(Icons.shopping_cart_rounded,color: Colors.black, size: 30,),
+            Text(
+              '${provider.cartItems.length}',
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+                backgroundColor: Colors.black87,
+              ),
+            ),
+          ]
+         ),
+         const SizedBox(width: 73,)
         ]
       ),
          

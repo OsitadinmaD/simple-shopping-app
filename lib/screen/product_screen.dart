@@ -11,7 +11,6 @@ class ProductScreen extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
-    //ScrollController scrollController = ScrollController(initialScrollOffset: 4, keepScrollOffset: false);
 
     return  Scaffold(
       body: SafeArea(

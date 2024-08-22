@@ -1,34 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:simple_shopping_app/help_classes/items_model.dart';
+import 'package:simple_shopping_app/screen/cart_provider.dart';
 
-class ItemCount extends StatefulWidget {
-  const ItemCount({super.key,required this.price , required this.totalPrice});
+class ItemCount extends StatelessWidget {
+  const ItemCount({super.key, required this.item});
 
-  final double price;
-  final double totalPrice;
-
-  static int quantity = 6;
-
+  final Items item;
   
-
-
-  @override
-  State<ItemCount> createState() => _ItemCountState();
-}
-
-class _ItemCountState extends State<ItemCount> {
-  late double _price;
-  late double _totalPrice;
-  static int  _count = 1;
-  @override
-  void initState(){
-    super.initState();
-    _price = widget.price;
-    _totalPrice = widget.totalPrice;
-    ItemCount.quantity = _count;
-  } 
-
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<CartProvider>(context);
     return  Container(
       height: 40,
       width: 250,
@@ -49,11 +31,11 @@ class _ItemCountState extends State<ItemCount> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 IconButton(
-                  onPressed: () => _decrementButton(),
+                  onPressed: () => provider.decrementQuantity(item: item),
                   icon: const Icon(Icons.remove,color: Colors.black, size: 15,)
                 ),
                 Text(
-                  '$_count',
+                  '${provider.totalQuantity}',
                   style: const TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.w400,
@@ -61,7 +43,7 @@ class _ItemCountState extends State<ItemCount> {
                     ), 
                 ),
                 IconButton(
-                  onPressed: () => _incrementButton(),
+                  onPressed: () => provider.incrementQuantity(item: item),
                   icon: const Icon(Icons.add,color: Colors.black, size: 15,)
                 ),
               ],
@@ -72,7 +54,7 @@ class _ItemCountState extends State<ItemCount> {
           top: 9,
           left: 130,
           child: Text(
-            '\$$_totalPrice',
+            '\$${provider.itemTotalPrice}',
             style: const TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.w400,
@@ -83,25 +65,6 @@ class _ItemCountState extends State<ItemCount> {
         ]
       ),
     );
-  }
-
-  void _incrementButton(){
-    setState(() {
-      _count += 1;
-      _totalPrice += _price;
-      ItemCount.quantity += 1;
-    });
-  }
-  
-  void _decrementButton(){
-    setState(() {
-      if(_count != 0){
-      _count -= 1;
-      _totalPrice -= _price;
-      ItemCount.quantity -= 1;
-      }
-    });
-
   }
 
 }

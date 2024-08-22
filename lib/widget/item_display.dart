@@ -72,7 +72,7 @@ class ItemDisplay extends StatelessWidget {
             Positioned(
               top: 80,
               left: 120,
-              child: ItemCount(price: item.price,totalPrice: item.price,),
+              child: ItemCount(item: item,),
             ),
             Positioned(
               top: 2,
